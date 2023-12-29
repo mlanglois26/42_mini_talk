@@ -6,13 +6,15 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:09:28 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/29 13:17:15 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:43:31 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_putchar(char c)
+#include "mini_talk.h"
+
+void	ft_putchar(char c)
 {
-    write(1, &c, 1);
+	write(1, &c, 1);
 }
 
 void	ft_putnbr(int n)
@@ -37,14 +39,14 @@ void	ft_putnbr(int n)
 	}
 }
 
-int ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
-    int i;
-    
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 void	ft_putstr(char *s)
