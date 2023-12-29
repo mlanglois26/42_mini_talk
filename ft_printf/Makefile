@@ -5,38 +5,43 @@
 #                                                     +:+ +:+         +:+      #
 #    By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/29 13:10:28 by malanglo          #+#    #+#              #
-#    Updated: 2023/12/29 15:11:44 by malanglo         ###   ########.fr        #
+#    Created: 2023/11/19 14:56:26 by malanglo          #+#    #+#              #
+#    Updated: 2023/11/30 11:01:34 by malanglo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = mini_talk
-
-SERVER = server
-CLIENT = client
+NAME = libftprintf.a
 
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror
 
-SERVER_SRC = server.c
-CLIENT_SRC = client.c
+SOURCES = 	ft_convert_char.c \
+			ft_convert_hexa_lower.c \
+			ft_convert_hexa_upper.c \
+			ft_convert_nbr.c \
+			ft_convert_pointer.c \
+			ft_convert_str.c \
+			ft_convert_unsigned.c \
+			ft_printf.c \
+			ft_utils.c \
+
+OBJECTS = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): ${SERVER} ${CLIENT}
+$(NAME):		${OBJECTS}
+		ar rcs ${NAME} ${OBJECTS}
 
-$(SERVER):
-		$(CC) $(CFLAGS) $(SERVER_SRC) -o $(SERVER)
-
-$(CLIENT):
-		$(CC) $(CFLAGS) $(CLIENT_SRC) -o $(CLIENT)
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 clean:
-		rm -f $(SERVER) $(CLIENT)
+	rm -f $(OBJECTS)
 
-fclean: clean
-		rm -f ${NAME}
+fclean:		clean
+		rm -f $(NAME)
 
-re: fclean all
+re:			fclean all
 
 .PHONY: all clean fclean re

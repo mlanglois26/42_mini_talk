@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:08:42 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/29 14:43:11 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:14:13 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 	{
 		pid = getpid();
-		printf("Server PID = %d\n", pid);
+		ft_printf("Le PID du Server est = %d\n", pid);
 		signal(SIGUSR1, ft_decrypt_message);
 		signal(SIGUSR2, ft_decrypt_message);
 		while (1)
