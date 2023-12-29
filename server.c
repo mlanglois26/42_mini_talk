@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:08:42 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/29 15:14:13 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:45:08 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_decrypt_message(int signal_value)
 		bit = 0;
 		c = 0;
 	}
+
 }
 
 int	main(int argc, char **argv)
