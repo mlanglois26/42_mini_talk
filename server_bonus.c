@@ -6,13 +6,11 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:59:47 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/30 14:05:36 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:08:55 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
-
-#define END_TRANSMISSION '\0'
 
 void	ft_handle_message(int signal_value, siginfo_t *info, void *context)
 {
