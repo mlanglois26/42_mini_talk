@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:45:28 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/15 15:08:07 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/30 10:22:58 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (specifier_count);
 }
-

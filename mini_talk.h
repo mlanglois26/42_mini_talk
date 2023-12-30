@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:09:05 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/29 16:58:05 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/30 11:56:11 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,8 @@ void	ft_send_characters_as_binary_signals(int pid, char c);
 
 // utils.c
 int		ft_atoi(const char *nptr);
+
+// bonus
+void ft_print_receipt(int signal_value);
 
 #endif

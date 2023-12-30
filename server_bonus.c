@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 13:08:42 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/30 11:15:40 by malanglo         ###   ########.fr       */
+/*   Created: 2023/12/30 10:59:47 by malanglo          #+#    #+#             */
+/*   Updated: 2023/12/30 12:48:43 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
-
-// cette fonction extrait les bits 1 ou 0 du signal recu et appends it au charactere qui est recu
-// 1 char = 8 bit lorsque c est complet on passe au charactere suivant 
 
 void	ft_decrypt_message(int signal_value)
 {
@@ -37,23 +34,21 @@ void	ft_decrypt_message(int signal_value)
 	}
 }
 
-// on set up le signal handlers pour sgusr1 et sgusr2 en utilisant la fnction signal
-// puis on rentre dans une boucle infinie et attend les isgnaux grace a pause
-
-
-int	main(int argc, char **argv)
+int	main(void)
 {
-	int	pid;
+	struct sigaction	gestion;
 
-	(void)argv;
-	if (argc == 1)
-	{
-		pid = getpid();
-		ft_printf("Le PID du Server est = %d\n", pid);
-		signal(SIGUSR1, ft_decrypt_message);
-		signal(SIGUSR2, ft_decrypt_message);
-		while (1)
-			pause();
-	}
+	gestion.sa_sigaction = &ft_handle_message;
+	gestion.sa_flags = SA_SIGINFO;
+	
+    sigemptyset(&gestion.sa_mask);
+	
+    ft_printf("Le PID du seveur est %d\n", getpid());
+	
+    sigaction(SIGUSR1, &gestion, NULL);
+	sigaction(SIGUSR2, &gestion, NULL);
+	
+    while (1)
+		pause();
 	return (0);
 }

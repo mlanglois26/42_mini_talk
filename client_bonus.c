@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 13:08:34 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/30 10:41:47 by malanglo         ###   ########.fr       */
+/*   Created: 2023/12/30 10:59:59 by malanglo          #+#    #+#             */
+/*   Updated: 2023/12/30 11:14:24 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
-
-// apres avoir envoye chaque bit le client attend grace au usleep qui permet au server de proceder les signaux recus
 
 void	ft_send_characters_as_binary_signals(int pid, char c)
 {
@@ -30,16 +28,26 @@ void	ft_send_characters_as_binary_signals(int pid, char c)
 	}
 }
 
+void ft_print_receipt(int signal_value)
+{
+    if (signal_value == SIGUSR1)
+        ft_printf("Le bit recu = 1\n");
+    if (signal_value == SIGUSR2)
+        ft_printf("Le bit recu = 0\n");
+}
+
 int	main(int argc, char **argv)
 {
 	int	pid;
 	int	i;
 
-	i = 0;
-	if (argc == 3)
+	signal(SIGUSR1, ft_print_receipt);
+    signal(SIGUSR1, ft_print_receipt);
+    if (argc == 3)
 	{
 		pid = atoi(argv[1]);
-		while (argv[2][i] != '\0')
+		i = 0;
+        while (argv[2][i] != '\0')
 		{
 			ft_send_characters_as_binary_signals(pid, argv[2][i++]);
 		}
@@ -47,3 +55,5 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
+
+

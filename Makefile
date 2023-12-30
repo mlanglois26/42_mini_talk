@@ -6,7 +6,7 @@
 #    By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:10:28 by malanglo          #+#    #+#              #
-#    Updated: 2023/12/29 17:38:36 by malanglo         ###   ########.fr        #
+#    Updated: 2023/12/30 12:29:10 by malanglo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,10 @@
 # .PHONY: all clean fclean re
 
 
-SRCS = client.c server.c
+SRCS = client.c server.c utils.c
 OBJS := $(SRCS:%.c=%.o)
+BSRCS = client_bonus.c server_bonus.c utils_bonus.c
+BOBJS := $(BSRCS:%.c=%.o)
 NAME = minitalk
 
 CC = gcc
@@ -58,10 +60,11 @@ CFLAGS = -Wall -Wextra -Werror -I./ft_printf
 
 all: $(NAME)
 
+$(NAME): server client
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): server client
 
 server: server.o
 	make -C ft_printf
@@ -71,13 +74,25 @@ client: client.o
 	make -C ft_printf
 	$(CC) $(CFLAGS) $^ -L./ft_printf -lftprintf -o client
 
+
+server_bonus: server_bonus.o
+	make -C ft_printf
+	$(CC) $(CFLAGS) $^ -L./ft_printf -lftprintf -o server_bonus
+
+client_bonus: client_bonus.o
+	make -C ft_printf
+	$(CC) $(CFLAGS) $^ -L./ft_printf -lftprintf -o client_bonus
+
+
 clean:
 	make clean -C ft_printf
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
-	$(RM) server client
+	$(RM) server client server_bonus client_bonus
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus: server_bonus client_bonus
+
+.PHONY: all clean fclean re bonus
