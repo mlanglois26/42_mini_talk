@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:59:59 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/30 11:14:24 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:01:37 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ void	ft_send_characters_as_binary_signals(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(100);
+		usleep(1000000);
 		bit_index--;
 	}
 }
 
-void ft_print_receipt(int signal_value)
+void ft_print_receipt(int signal)
 {
-    if (signal_value == SIGUSR1)
-        ft_printf("Le bit recu = 1\n");
-    if (signal_value == SIGUSR2)
-        ft_printf("Le bit recu = 0\n");
+    if (signal == SIGUSR1)
+        ft_printf("Le bit recu est 1\n");
+    if (signal == SIGUSR2)
+        ft_printf("Le bit recu est 0\n");
 }
 
 int	main(int argc, char **argv)
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	int	i;
 
 	signal(SIGUSR1, ft_print_receipt);
-    signal(SIGUSR1, ft_print_receipt);
+    signal(SIGUSR2, ft_print_receipt);
     if (argc == 3)
 	{
 		pid = atoi(argv[1]);

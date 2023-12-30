@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:09:05 by malanglo          #+#    #+#             */
-/*   Updated: 2023/12/30 11:56:11 by malanglo         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:00:01 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ int		ft_atoi(const char *nptr);
 
 // bonus
 void ft_print_receipt(int signal_value);
+void	ft_handle_message(int signal_value, siginfo_t *info, void *context);
+
 
 #endif
