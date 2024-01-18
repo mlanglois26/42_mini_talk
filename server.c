@@ -5,18 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 13:08:42 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/17 19:47:17 by malanglo         ###   ########.fr       */
+/*   Created: 2024/01/18 21:23:34 by malanglo          #+#    #+#             */
+/*   Updated: 2024/01/18 21:47:07 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
 
-void	ft_decrypt_message(int signal_value)
+void	ft_handle_message(int signal_value, siginfo_t *action, void *context)
 {
 	static int	bit_index;
 	static int	c;
 
+	(void)context;
 	if (signal_value == SIGUSR1)
 		c += 1 << (7 - bit_index);
 	else if (signal_value == SIGUSR2)
@@ -28,21 +29,20 @@ void	ft_decrypt_message(int signal_value)
 		bit_index = 0;
 		c = 0;
 	}
+	kill(action->si_pid, SIGUSR2);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	int	pid;
+	struct sigaction	action;
 
-	(void)argv;
-	if (argc == 1)
-	{
-		pid = getpid();
-		ft_printf("Le PID du Server est = %d\n", pid);
-		signal(SIGUSR1, ft_decrypt_message);
-		signal(SIGUSR2, ft_decrypt_message);
-		while (1)
-			pause();
-	}
+	ft_printf("Le PID du seveur est %d\n", getpid());
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = SA_SIGINFO;
+	action.sa_sigaction = &ft_handle_message;
+	sigaction(SIGUSR1, &action, NULL);
+	sigaction(SIGUSR2, &action, NULL);
+	while (1)
+		pause();
 	return (0);
 }

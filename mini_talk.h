@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:09:05 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/18 14:45:08 by malanglo         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:13:51 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-// server.c
-void	ft_decrypt_message(int signal_value);
-
-// client.c
-void	ft_send_characters_as_binary_signals(int pid, char c);
-
 // utils.c
-int		ft_atoi(const char *nptr);
-void	ft_putstr_fd(char *str, int fd);
+int	ft_atoi(const char *nptr);
 
 #endif

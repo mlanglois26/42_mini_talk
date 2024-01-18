@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:59:47 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/18 15:19:21 by malanglo         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:22:16 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_handle_message(int signal_value, siginfo_t *action, void *context)
 		bit_index = 0;
 		c = 0;
 	}
+	kill(action->si_pid, SIGUSR2);
 }
 
 int	main(void)
