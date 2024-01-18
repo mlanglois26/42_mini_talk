@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_talk.h                                        :+:      :+:    :+:   */
+/*   mini_talk_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 13:09:05 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/18 14:45:08 by malanglo         ###   ########.fr       */
+/*   Created: 2024/01/17 16:27:00 by malanglo          #+#    #+#             */
+/*   Updated: 2024/01/17 16:55:28 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_TALK_H
-# define MINI_TALK_H
+#ifndef MINI_TALK_BONUS_H
+# define MINI_TALK_BONUS_H
 
 # include "ft_printf/ft_printf.h"
 # include <signal.h>
@@ -29,6 +29,9 @@ void	ft_send_characters_as_binary_signals(int pid, char c);
 
 // utils.c
 int		ft_atoi(const char *nptr);
-void	ft_putstr_fd(char *str, int fd);
+
+// bonus
+void	ft_print_receipt(int signal_value);
+void	ft_handle_message(int signal_value, siginfo_t *info, void *context);
 
 #endif
