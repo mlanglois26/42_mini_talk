@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:59:59 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/18 21:45:32 by malanglo         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:04:03 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ static void	ft_send_characters_as_binary_signals(int pid, char c)
 	}
 }
 
+static void	ft_manage_signals(int signal)
+{
+	if (signal == SIGUSR1)
+		ft_printf("Message bien recu\n");
+	if (signal == SIGUSR2)
+		g_control = 1;
+}
+
 static void	ft_get_str_and_eof(int pid, char *str)
 {
 	int	i;
@@ -39,19 +47,13 @@ static void	ft_get_str_and_eof(int pid, char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
+		signal(SIGUSR2, ft_manage_signals);
+		signal(SIGUSR1, ft_manage_signals);
 		ft_send_characters_as_binary_signals(pid, str[i]);
 		i++;
 	}
 	ft_send_characters_as_binary_signals(pid, '\n');
 	ft_send_characters_as_binary_signals(pid, '\0');
-}
-
-static void	ft_manage_signals(int signal)
-{
-	if (signal == SIGUSR1)
-		ft_printf("Message bien recu\n");
-	if (signal == SIGUSR2)
-		g_control = 1;
 }
 
 int	main(int argc, char **argv)
@@ -64,16 +66,12 @@ int	main(int argc, char **argv)
 		if (kill(ft_atoi(argv[1]), 0) < 0)
 			ft_printf("Error. Invalid PID number.\n");
 		else
-		{
-			signal(SIGUSR1, ft_manage_signals);
-			signal(SIGUSR2, ft_manage_signals);
 			ft_get_str_and_eof(pid, argv[2]);
-		}
 	}
 	else
 	{
 		ft_printf("Error. Something went wrong.\n");
-		ft_printf("Accepted format: ./client PID MESSAGE\n");
+		ft_printf("Accepted format: ./client <PID> <MESSAGE>.\n");
 	}
 	return (0);
 }

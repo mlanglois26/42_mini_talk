@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:08:34 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/18 21:16:39 by malanglo         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:04:09 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	ft_get_str_and_eof(int pid, char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
+		signal(SIGUSR2, ft_control);
 		ft_send_characters_as_binary_signals(pid, str[i]);
 		i++;
 	}
@@ -62,15 +63,12 @@ int	main(int argc, char **argv)
 		if (kill(ft_atoi(argv[1]), 0) < 0)
 			ft_printf("Error. Invalid PID number.\n");
 		else
-		{
-			signal(SIGUSR2, ft_control);
 			ft_get_str_and_eof(pid, argv[2]);
-		}
 	}
 	else
 	{
 		ft_printf("Error. Something went wrong.\n");
-		ft_printf("Accepted format: ./client <PID> <MESSAGE>\n");
+		ft_printf("Accepted format: ./client <PID> <MESSAGE>.\n");
 	}
 	return (0);
 }
