@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:59:59 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/20 10:31:10 by malanglo         ###   ########.fr       */
+/*   Updated: 2024/01/20 10:55:05 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int	main(int argc, char **argv)
 	if (argc == 3 && argv[2][0] != '\0')
 	{
 		pid = ft_atoi(argv[1]);
-		if (kill(pid, 0) < 0)
-			ft_printf("Error. Invalid PID number.\n");
-		else
-			ft_get_str_and_eof(pid, argv[2]);
+		ft_get_str_and_eof(pid, argv[2]);
 	}
 	else
 	{
