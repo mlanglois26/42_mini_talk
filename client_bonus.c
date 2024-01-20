@@ -6,7 +6,7 @@
 /*   By: malanglo <malanglo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 10:59:59 by malanglo          #+#    #+#             */
-/*   Updated: 2024/01/19 11:04:03 by malanglo         ###   ########.fr       */
+/*   Updated: 2024/01/20 10:31:10 by malanglo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			g_control;
 
-static void	ft_send_characters_as_binary_signals(int pid, char c)
+void	ft_send_characters_as_binary_signals(int pid, char c)
 {
 	int	bit_index;
 
@@ -32,7 +32,7 @@ static void	ft_send_characters_as_binary_signals(int pid, char c)
 	}
 }
 
-static void	ft_manage_signals(int signal)
+void	ft_manage_signals(int signal)
 {
 	if (signal == SIGUSR1)
 		ft_printf("Message bien recu\n");
@@ -40,7 +40,7 @@ static void	ft_manage_signals(int signal)
 		g_control = 1;
 }
 
-static void	ft_get_str_and_eof(int pid, char *str)
+void	ft_get_str_and_eof(int pid, char *str)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv)
 	if (argc == 3 && argv[2][0] != '\0')
 	{
 		pid = ft_atoi(argv[1]);
-		if (kill(ft_atoi(argv[1]), 0) < 0)
+		if (kill(pid, 0) < 0)
 			ft_printf("Error. Invalid PID number.\n");
 		else
 			ft_get_str_and_eof(pid, argv[2]);
